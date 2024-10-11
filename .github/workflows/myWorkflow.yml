@@ -1,9 +1,27 @@
 name: myWorkflow
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
-    myJob:
-        runs-on: ubuntu-latest
-        steps:
-            - name: myStep
-              run: echo "hello world"
+  myJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: myStep
+        run: echo "Bye Bye!"
+
+  pullRequestJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Request Step
+        run: echo "Pull request triggered"
+
+  dateJob:
+    runs-on: ubuntu-latest
+    needs: pullRequestJob
+    steps:
+      - name: Zeige das Datum an
+        run: date
